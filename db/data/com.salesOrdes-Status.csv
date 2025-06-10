@@ -1,0 +1,4 @@
+code,name,criticality
+Canceled,Canceled,1
+InProcess,In Process,2
+Delivered,Delivered,3
