@@ -1,5 +1,11 @@
 using {SalesOrdes as services} from '../service';
 
+using from './annotations-items';
+
+
+annotate services.Headers with @odata.draft.enabled ;
+
+
 annotate services.Headers with {
 
     email        @title: 'Email';
@@ -15,31 +21,77 @@ annotate services.Headers with {
 
 annotate services.Headers with {
 
- orderstatus @Common: {
+    orderstatus @Common: {
 
-         Text : orderstatus.name,
-         TextArrangement : #TextOnly
-    }
-   
+        Text           : orderstatus.name,
+        TextArrangement: #TextOnly
+    };
+    ID          @Common: {ValueList: {
+        $Type         : 'Common.ValueListType',
+        CollectionPath: 'Headers',
+        Parameters    : [{
+            $Type            : 'Common.ValueListParameterOut',
+            LocalDataProperty: ID,
+            ValueListProperty: 'ID',
+        }, ],
+    }, };
+    firstname   @Common: {ValueList: {
+        $Type         : 'Common.ValueListType',
+        CollectionPath: 'Headers',
+        Parameters    : [
+            {
+                $Type            : 'Common.ValueListParameterOut',
+                LocalDataProperty: firstname,
+                ValueListProperty: 'firstname',
+            },
+            {
+                $Type            : 'Common.ValueListParameterDisplayOnly',
+                ValueListProperty: 'ID',
+            },
+
+        ],
+    }, };
+    createon    @Common: {ValueList: {
+        $Type         : 'Common.ValueListType',
+        CollectionPath: 'Headers',
+        Parameters    : [{
+            $Type            : 'Common.ValueListParameterOut',
+            LocalDataProperty: createon,
+            ValueListProperty: 'createon',
+        }, ],
+    }, };
+
+
 };
 
 
 annotate services.Headers with @(
 
-   Common.SemanticKey : [
+    Common.SemanticKey      : [
 
-      ID,
-      email
+        ID,
+        email
 
-   ],
+    ],
 
-    UI.HeaderInfo     : {
+    UI.HeaderInfo           : {
         $Type         : 'UI.HeaderInfoType',
         TypeName      : 'Header',
         TypeNamePlural: 'Headers',
+        TypeImageUrl  : 'imagenUrl',
+        Title         : {
+            $Type: 'UI.DataField',
+            Value: firstname
+        },
+        Description   : {
+            $Type: 'UI.DataField',
+            Value: ID
+        },
+
+
     },
 
-    UI.SelectionFields: [
+    UI.SelectionFields      : [
 
         ID,
         firstname,
@@ -48,7 +100,7 @@ annotate services.Headers with @(
 
 
     ],
-    UI.LineItem       : [
+    UI.LineItem             : [
         {
             $Type: 'UI.DataField',
             Value: ID,
@@ -78,12 +130,92 @@ annotate services.Headers with @(
             Value: deliverydate,
         },
         {
-            $Type: 'UI.DataField',
-            Value: orderstatus_code,
-           Criticality : orderstatus.criticality
+            $Type      : 'UI.DataField',
+            Value      : orderstatus_code,
+            Criticality: orderstatus.criticality
 
         }
     ],
 
-);
+    UI.FieldGroup #Header   : {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: firstname,
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: lastname,
+            },
 
+        ]
+    },
+    UI.FieldGroup #HeaderDES: {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+
+            {
+                $Type: 'UI.DataField',
+                Value: country,
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: createon,
+            }
+
+        ]
+    },
+    UI.FieldGroup #HeaderSA : {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+
+            {
+                $Type: 'UI.DataField',
+                Value: deliverydate,
+            },
+            {
+                $Type      : 'UI.DataField',
+                Value      : orderstatus_code,
+                Criticality: orderstatus.criticality
+            }
+        ]
+    },
+    UI.FieldGroup #Items    : {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+
+            {
+                $Type: 'UI.DataField',
+                Value: toItems.ID
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: toItems.name
+            }
+        ]
+    },
+
+    UI.HeaderFacets         : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            Target: '@UI.FieldGroup#Header',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Target: '@UI.FieldGroup#HeaderDES',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Target: '@UI.FieldGroup#HeaderSA',
+        },
+    ],
+    UI.Facets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            Target : 'toItems/@UI.LineItem',
+            Label : 'Items'
+            
+        },
+    ]
+);

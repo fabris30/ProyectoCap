@@ -1,13 +1,12 @@
 namespace com.salesOrdes;
 
 using {
-    cuid,
     sap.common.CodeList
 } from '@sap/cds/common';
 
-entity Headers : cuid {
-
-    key email        : String(30);
+entity Headers {
+    key ID : String(36);
+        email        : String(30);
         firstname    : String(30);
         lastname     : String(30);
         country      : String(30);
@@ -19,9 +18,9 @@ entity Headers : cuid {
                            on toItems.headers = $self;
 }
 
-entity Items : cuid {
+entity Items {
 
-
+    key ID : String(36);
         name             : String(40);
         description      : String(40);
         releasedate      : Date;
