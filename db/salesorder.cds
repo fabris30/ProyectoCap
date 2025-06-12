@@ -1,11 +1,12 @@
 namespace com.salesOrdes;
 
 using {
-    sap.common.CodeList
+    sap.common.CodeList,
+    sap.common.Currencies
 } from '@sap/cds/common';
 
 entity Headers {
-    key ID : String(36);
+    key ID           : String(36);
         email        : String(30);
         firstname    : String(30);
         lastname     : String(30);
@@ -20,12 +21,13 @@ entity Headers {
 
 entity Items {
 
-    key ID : String(36);
+    key ID               : String(36);
         name             : String(40);
         description      : String(40);
         releasedate      : Date;
         discontinueddate : Date;
         price            : Decimal(12, 2);
+        currency         : Association to Currencies;
         height           : Decimal(15, 3);
         width            : Decimal(13, 2);
         depth            : Decimal(12, 2);

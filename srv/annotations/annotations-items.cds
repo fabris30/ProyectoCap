@@ -7,10 +7,11 @@ annotate services.Items with {
     description      @title: 'Description';
     releasedate      @title: 'Release Date';
     discontinueddate @title: 'Discontinued Date';
-    price            @title: 'Price';
-    height           @title: 'Height'           @Measures.Unit: unitofmeasure;
-    width            @title: 'Width'            @Measures.Unit: unitofmeasure;
-    depth            @title: 'Depth'            @Measures.Unit: unitofmeasure;
+    price            @title: 'Price'            @Measures.ISOCurrency: currency_code;
+    currency         @title: 'Currency'         @Common.IsCurrency;
+    height           @title: 'Height'           @Measures.Unit       : unitofmeasure;
+    width            @title: 'Width'            @Measures.Unit       : unitofmeasure;
+    depth            @title: 'Depth'            @Measures.Unit       : unitofmeasure;
     quantity         @title: 'Quantity';
     unitofmeasure    @title: 'Unit to Measure'  @Common.IsUnit;
 
@@ -35,6 +36,7 @@ annotate services.Items with @(
     },
 
     UI.LineItem            : [
+
 
         {
             $Type: 'UI.DataField',
@@ -76,6 +78,8 @@ annotate services.Items with @(
             $Type: 'UI.DataField',
             Value: quantity,
         }
+        
+
     ],
     UI.FieldGroup #Itemsdet: {
 

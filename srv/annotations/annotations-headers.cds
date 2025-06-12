@@ -12,7 +12,7 @@ annotate services.Headers with {
     firstname    @title: 'First Name';
     lastname     @title: 'Last Name';
     country      @title: 'Country';
-    createon     @title: 'Createon';
+    createon     @title: 'Create On';
     deliverydate @title: 'Delivey Date';
     orderstatus  @title: 'Order Status';
     imagenUrl    @title: 'Image URL';
@@ -78,7 +78,6 @@ annotate services.Headers with @(
         $Type         : 'UI.HeaderInfoType',
         TypeName      : 'Header',
         TypeNamePlural: 'Headers',
-        TypeImageUrl  : 'imagenUrl',
         Title         : {
             $Type: 'UI.DataField',
             Value: firstname
@@ -87,7 +86,10 @@ annotate services.Headers with @(
             $Type: 'UI.DataField',
             Value: ID
         },
-
+         ImageUrl  :  {
+              $value: imagenUrl,
+            
+         }
 
     },
 
@@ -133,8 +135,12 @@ annotate services.Headers with @(
             $Type      : 'UI.DataField',
             Value      : orderstatus_code,
             Criticality: orderstatus.criticality
-
-        }
+        },
+          {
+            $Type: 'UI.DataField',
+            Value: imagenUrl,
+            ![@UI.Hidden],
+        },
     ],
 
     UI.FieldGroup #Header   : {
@@ -178,7 +184,12 @@ annotate services.Headers with @(
                 $Type      : 'UI.DataField',
                 Value      : orderstatus_code,
                 Criticality: orderstatus.criticality
-            }
+            },
+            
+            {
+                $Type: 'UI.DataField',
+                Value: imagenUrl,
+            },
         ]
     },
     UI.FieldGroup #Items    : {
