@@ -1,9 +1,8 @@
 using {SalesOrdes as services} from '../service';
-
 using from './annotations-items';
 
 
-annotate services.Headers with @odata.draft.enabled ;
+annotate services.Headers with @odata.draft.enabled;
 
 
 annotate services.Headers with {
@@ -86,10 +85,9 @@ annotate services.Headers with @(
             $Type: 'UI.DataField',
             Value: ID
         },
-         ImageUrl  :  {
-              $value: imagenUrl,
-            
-         }
+        ImageUrl      : {$value: imagenUrl,
+
+        }
 
     },
 
@@ -136,7 +134,7 @@ annotate services.Headers with @(
             Value      : orderstatus_code,
             Criticality: orderstatus.criticality
         },
-          {
+        {
             $Type: 'UI.DataField',
             Value: imagenUrl,
             ![@UI.Hidden],
@@ -185,7 +183,7 @@ annotate services.Headers with @(
                 Value      : orderstatus_code,
                 Criticality: orderstatus.criticality
             },
-            
+
             {
                 $Type: 'UI.DataField',
                 Value: imagenUrl,
@@ -221,12 +219,10 @@ annotate services.Headers with @(
             Target: '@UI.FieldGroup#HeaderSA',
         },
     ],
-    UI.Facets : [
-        {
-            $Type : 'UI.ReferenceFacet',
-            Target : 'toItems/@UI.LineItem',
-            Label : 'Items'
-            
-        },
-    ]
+    UI.Facets               : [{
+        $Type : 'UI.ReferenceFacet',
+        Target: 'toItems/@UI.LineItem',
+        Label : 'Items'
+
+    }, ]
 );
