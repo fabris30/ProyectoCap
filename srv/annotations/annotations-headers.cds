@@ -25,6 +25,10 @@ annotate services.Headers with {
         Text           : orderstatus.name,
         TextArrangement: #TextOnly
     };
+    country @Common : { 
+          Text           : country.name,
+           TextArrangement: #TextOnly
+     };
     ID          @Common: {ValueList: {
         $Type         : 'Common.ValueListType',
         CollectionPath: 'Headers',
@@ -95,6 +99,7 @@ annotate services.Headers with @(
 
         ID,
         firstname,
+        country_code,
         createon,
         orderstatus_code,
 
@@ -119,7 +124,7 @@ annotate services.Headers with @(
         },
         {
             $Type: 'UI.DataField',
-            Value: country,
+            Value: country_code,
         },
         {
             $Type: 'UI.DataField',
@@ -146,6 +151,10 @@ annotate services.Headers with @(
         Data : [
             {
                 $Type: 'UI.DataField',
+                Value: email,
+            },
+            {
+                $Type: 'UI.DataField',
                 Value: firstname,
             },
             {
@@ -161,7 +170,7 @@ annotate services.Headers with @(
 
             {
                 $Type: 'UI.DataField',
-                Value: country,
+                Value: country_code,
             },
             {
                 $Type: 'UI.DataField',

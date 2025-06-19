@@ -2,7 +2,8 @@ namespace com.salesOrdes;
 
 using {
     sap.common.CodeList,
-    sap.common.Currencies
+    sap.common.Currencies,
+    sap.common.Countries
 } from '@sap/cds/common';
 
 entity Headers {
@@ -10,7 +11,7 @@ entity Headers {
         email        : String(30);
         firstname    : String(30);
         lastname     : String(30);
-        country      : String(30);
+        country      : Association to Countries;
         createon     : Date;
         deliverydate : Date;
         orderstatus  : Association to Status;
