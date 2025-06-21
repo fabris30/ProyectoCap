@@ -54,17 +54,7 @@ annotate services.Headers with {
 
         ],
     }, };
-    createon    @Common: {ValueList: {
-        $Type         : 'Common.ValueListType',
-        CollectionPath: 'Headers',
-        Parameters    : [{
-            $Type            : 'Common.ValueListParameterOut',
-            LocalDataProperty: createon,
-            ValueListProperty: 'createon',
-        }, ],
-    }, };
-
-
+  
 };
 
 
@@ -100,7 +90,6 @@ annotate services.Headers with @(
         ID,
         firstname,
         country_code,
-        createon,
         orderstatus_code,
 
 

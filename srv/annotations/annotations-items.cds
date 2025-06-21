@@ -132,5 +132,5 @@ annotate services.Items with @(
         $Type : 'UI.ReferenceFacet',
         Target: '@UI.FieldGroup#Itemsdet',
         Label : 'Items',
-    }]
+    }] 
 );
